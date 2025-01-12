@@ -5,23 +5,26 @@ echo "Please enter the port number you want Apache to listen on:"
 read PORT
 
 
-if ! [ -x "$(command -v netstat)" ]; then
-  echo 'netstat command not found, installing net-tools...'
-  apt-get -y install net-tools > /dev/null
-fi
-
-while netstat -tuln | grep ":$PORT" > /dev/null; do
-  echo "Port $PORT is already in use. Please enter a different port:"
-  read PORT
-done
-
-if ! grep -q "Listen $PORT" /etc/apache2/ports.conf; then
-  echo "Configuring Apache to listen on port $PORT..."
-  echo "Listen $PORT" >> /etc/apache2/ports.conf
+if [ -d /var/www/geo-location-api ] && [ $(ls -lt /var/www/geo-location-api | wc -l) -gt 0 ]; then
+  echo "Directory /var/www/geo-location-api already exists and contains files. Skipping port validation..."
 else
-  echo "Port $PORT is already configured."
-fi
+  if ! [ -x "$(command -v netstat)" ]; then
+    echo 'netstat command not found, installing net-tools...'
+    apt-get -y install net-tools > /dev/null
+  fi
 
+  while netstat -tuln | grep ":$PORT" > /dev/null; do
+    echo "Port $PORT is already in use. Please enter a different port:"
+    read PORT
+  done
+
+  if ! grep -q "Listen $PORT" /etc/apache2/ports.conf; then
+    echo "Configuring Apache to listen on port $PORT..."
+    echo "Listen $PORT" >> /etc/apache2/ports.conf
+  else
+    echo "Port $PORT is already configured."
+  fi
+fi
 
 echo "Setting up Apache virtual host on port $PORT..."
 VHOST_FILE="/etc/apache2/sites-available/geo-location-api.conf"
