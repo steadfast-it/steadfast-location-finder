@@ -9,9 +9,25 @@ Before running the application, ensure you have the following installed:
 
 - **Ubuntu (22.04)**
 - **Git**
-- **Nominatim** (Ensure it's installed)
 
-## Installation
+# Nominatim Server Installation (Skip if Already Installed)
+
+Step 1: Get the Nominatim-Server.sh script from GitHub
+
+      wget https://raw.githubusercontent.com/AcuGIS/Nominatim-Server/master/Nominatim-Server.sh
+
+Step 2: Make it executable:
+
+    chmod 755 Nominatim-Server-22.sh
+
+Step 3: Run the script
+
+The script accepts a PBF url:
+
+    ./Nominatim-Server-22.sh  https://download.geofabrik.de/asia/bangladesh-latest.osm.pbf
+
+
+# Location API
 
 Follow these steps to get the application up and running:
 
@@ -47,9 +63,17 @@ After granting execute permissions, run the installation script to install all d
 ./install.sh
 ```
 
-### 5. Access the Application
+### 5. Set the API Key
 
-Once the installation is complete, follow the necessary steps to access the application.
+1. Open the `/var/www/geo-location-api/index.php` file and replace the placeholder API key `XXXX` with your actual API key.
+
+```php
+define('API_KEY', 'YOUR_API_KEY');
+```
+
+### 6: Authentication
+
+To authenticate your API requests, include the `X-API-Key` header with your valid API key.
 
 ## License
 
@@ -58,5 +82,3 @@ Once the installation is complete, follow the necessary steps to access the appl
 This project is not open for public modification, redistribution, or contributions. Please use the provided features as per the terms of the license (if applicable). Unauthorized usage or distribution is prohibited.
 
 If you have any questions or need access, please contact the repository owner.
-
-This project is close source
