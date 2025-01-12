@@ -14,7 +14,7 @@ Before running the application, ensure you have the following installed:
 
 Step 1: Get the Nominatim-Server.sh script from GitHub
 
-      wget https://raw.githubusercontent.com/AcuGIS/Nominatim-Server/master/Nominatim-Server.sh
+      wget https://raw.githubusercontent.com/AcuGIS/Nominatim-Server/master/Nominatim-Server-22.sh
 
 Step 2: Make it executable:
 
