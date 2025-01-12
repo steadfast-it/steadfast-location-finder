@@ -61,18 +61,18 @@ sed -i "s/SCRIPT_URL_SLOT/http:\/\/localhost:$PORT/g" /var/www/geo-location-api/
 echo "Setting file permissions..."
 chown -R www-data:www-data /var/www/geo-location-api
 
-if ! grep -q "www-data ALL=(ALL) NOPASSWD: /var/www/geo-location-api/create.sh" /etc/sudoers; then
-    echo "www-data ALL=(ALL) NOPASSWD: /var/www/geo-location-api/create.sh" | sudo tee -a /etc/sudoers > /dev/null
+if ! grep -q "www-data ALL=(ALL) NOPASSWD: /var/www/geo-location-api/scripts/create.sh" /etc/sudoers; then
+    echo "www-data ALL=(ALL) NOPASSWD: /var/www/geo-location-api/scripts/create.sh" | sudo tee -a /etc/sudoers > /dev/null
     echo "Line added successfully to /etc/sudoers"
 fi
 
-if ! grep -q "www-data ALL=(ALL) NOPASSWD: /tmp/update.sh" /etc/sudoers; then
-    echo "www-data ALL=(ALL) NOPASSWD: /var/www/geo-location-api/update.sh" | sudo tee -a /etc/sudoers > /dev/null
+if ! grep -q "www-data ALL=(ALL) NOPASSWD: /var/www/geo-location-api/scripts/update.sh" /etc/sudoers; then
+    echo "www-data ALL=(ALL) NOPASSWD: /var/www/geo-location-api/scripts/update.sh" | sudo tee -a /etc/sudoers > /dev/null
     echo "Line added successfully to /etc/sudoers"
 fi
 
 if ! grep -q "www-data ALL=(ALL) NOPASSWD: /var/www/geo-location-api/delete.sh" /etc/sudoers; then
-    echo "www-data ALL=(ALL) NOPASSWD: /var/www/geo-location-api/delete.sh" | sudo tee -a /etc/sudoers > /dev/null
+    echo "www-data ALL=(ALL) NOPASSWD: /var/www/geo-location-api/scripts/delete.sh" | sudo tee -a /etc/sudoers > /dev/null
     echo "Line added successfully to /etc/sudoers"
 fi
 
