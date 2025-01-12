@@ -44,6 +44,8 @@ systemctl restart apache2
 echo "Moving ./application to /var/www/geo-location-api..."
 mv ./application /var/www/geo-location-api
 
+echo "Replacing SCRIPT_URL_SLOT with http://localhost:$PORT in index.php..."
+sed -i "s/SCRIPT_URL_SLOT/http:\/\/localhost:$PORT/g" /var/www/geo-location-api/index.php
 
 echo "Setting file permissions..."
 chown -R www-data:www-data /var/www/geo-location-api
