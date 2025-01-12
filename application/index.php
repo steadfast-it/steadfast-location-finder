@@ -6,8 +6,8 @@ ini_set('display_errors', 1);
 ini_set('log_errors', 1);
 error_reporting(E_ALL);
 
-define('SCRIPT_URL', 'SCRIPT_URL_SLOT/create.sh');
-define('SCRIPT_PATH', '/var/www/geo-location-api/create.sh');
+define('SCRIPT_URL', 'SCRIPT_URL_SLOT/scripts/create.sh');
+define('SCRIPT_PATH', '/var/www/geo-location-api/scripts/create.sh');
 define('API_KEY', 'XXXX');
 
 function validateApiKey($headers) {
