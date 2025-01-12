@@ -5,11 +5,15 @@ echo "Please enter the port number you want Apache to listen on:"
 read PORT
 
 
+if ! [ -x "$(command -v netstat)" ]; then
+  echo 'netstat command not found, installing net-tools...'
+  apt-get -y install net-tools > /dev/null
+fi
+
 while netstat -tuln | grep ":$PORT" > /dev/null; do
   echo "Port $PORT is already in use. Please enter a different port:"
   read PORT
 done
-
 
 if ! grep -q "Listen $PORT" /etc/apache2/ports.conf; then
   echo "Configuring Apache to listen on port $PORT..."
@@ -40,6 +44,10 @@ EOF
 echo "Enabling site configuration and restarting Apache..."
 a2ensite geo-location-api.conf
 systemctl restart apache2
+
+
+echo "Creating directory structure..."
+mkdir -p /var/www/geo-location-api
 
 echo "Moving all files from ./application to /var/www/geo-location-api..."
 mv ./application/* /var/www/geo-location-api
